@@ -1,0 +1,14 @@
+## Autotagging
+
+This plugin requires an autotagging configuration to tag shots
+To add an autotag in DataIQ, go to Settings -> Data management configuration -> Configure autotagging
+The shot tag must respect this format: shot/project_sequence_shot
+The following example shows a valid autotagging rule
+
+match /shotgun_volume/([^/]+)/sequences/([^/]+)/shots/([^/]+)
+   max_depth 6
+   apply_tag shot/$1_$2_$3
+
+## Configuration
+
+The shotgun credentials need to be configured in the ca.control file or in the DataIQ UI

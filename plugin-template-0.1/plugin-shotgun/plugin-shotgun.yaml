@@ -1,0 +1,70 @@
+---
+#
+# Copyright © 2016-2020 Dell Inc. or its subsidiaries.
+# All Rights Reserved.
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: plugin-shotgun
+  namespace: dataiq
+  labels:
+    run: plugin-shotgun
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 5000
+  selector:
+    run: plugin-shotgun
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plugin-shotgun
+  namespace: dataiq
+spec:
+  selector:
+    matchLabels:
+      run: plugin-shotgun
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        run: plugin-shotgun
+    spec:
+      containers:
+      - name: plugin-shotgun
+        image: plugin-shotgun:1.0-3
+        ports:
+        - containerPort: 5000
+          name: http
+        volumeMounts:
+        - name: plugin-data
+          mountPath: /hoststorage
+          mountPropagation: HostToContainer
+        - name: claritynow-mnt
+          mountPath: /mnt
+          readOnly: false
+          mountPropagation: HostToContainer
+        - name: claritynow-python
+          mountPath: /usr/local/claritynow/scripts/python
+          readOnly: true
+          mountPropagation: HostToContainer
+        env:
+        - name: LC_ALL
+          value: en_US.UTF-8
+        - name: SHOTGUN_PLUGIN_MODE
+          value: dataiq
+      volumes:
+      - name: plugin-data
+        hostPath:
+          path: /opt/dataiq/maunakea/data/plugins/plugin-shotgun
+      - name: claritynow-mnt
+        hostPath:
+          path: /mnt
+      - name: claritynow-python
+        hostPath:
+          path: /opt/dataiq/maunakea/claritynow/plugins/
+...

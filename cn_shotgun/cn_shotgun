@@ -1,0 +1,1 @@
+* 1 * * * root /usr/local/claritynow/scripts/plugins.d/cn_shotgun/cn_shotgun.py

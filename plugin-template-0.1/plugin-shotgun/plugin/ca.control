@@ -1,0 +1,49 @@
+---
+#
+# Copyright (c) 2016-2020 Dell Inc. or its subsidiaries.
+# All Rights Reserved.
+#
+# Important notes:
+# 1. The only portion within the "Actions" section that should be altered
+# is the list of "groups", that are allowed to see and execute
+# each Custom Action Item.
+# Changing any other part within "Actions" can cause unexpected errors.
+#
+# 2. To enable Scheduled Jobs (Cron Jobs), uncomment the "Cron Jobs"
+# section and configure the times you would like it to run.
+#
+# 3. You may also edit the values in "Global Configurations", but
+# make sure the values you use are valid options for each item.
+#
+"Plugin Name": "Shotgun Plugin"
+"Version": "1.0-3"
+"Actions":
+  "Run Shotgun plugin":
+    endpoint: "/execute/"
+    filter:
+      groups:
+        - DataIQ Administrators
+      listed_within:
+        - browse
+        - search
+      volume_types:
+        - TYPE_VFS
+        - TYPE_S3
+      applies:
+        - files
+        - folders
+        - single_volume
+      max_selections: 10000
+    command:  'python2.7 /plugin/cn_shotgun.py'
+"Cron Jobs":
+ "Cron job - Shotgun plugin":
+   "Command": 'python2.7 /plugin/cn_shotgun.py'
+   "Execute On":
+     DateTimes:
+       - "*-*-* 01:00:00" # Run at precisely 1AM everyday
+"Global Configurations":
+  shotgunAPIUrl: "YourShotgunAPIUrl"
+  shotgunAPIScriptName: "YourShotgunAPIScriptName"
+  shotgunAPIKey: "YourShotgunAPIKey"
+  expirationDelay: 7
+...

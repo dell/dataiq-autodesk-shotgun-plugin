@@ -1,0 +1,1 @@
+/usr/local/claritynow/scripts/plugins.d/cn_shotgun/dependencies/shotgun-api3.tar.gz

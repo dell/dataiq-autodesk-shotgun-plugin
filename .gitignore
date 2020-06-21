@@ -1,0 +1,7 @@
+.vagrant/
+*.pyc
+cn_tag_lookup/
+cn_minfo/
+note
+dataiq_installer_1.0.0.11_202003121718_v1.sh
+build_dataiq_plugin/dataiq-shotgun-installer-*.tar.gz

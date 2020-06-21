@@ -1,0 +1,3 @@
+%packager CLARITYNOW
+%_topdir /vagrant/rpmbuild
+%_tmppath /vagrant/rpm/tmpbuild

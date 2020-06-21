@@ -1,0 +1,8 @@
+beautifulsoup4 == 4.8.1
+flask
+dataiq-plugin == 0.11.1
+datetime
+pyyaml
+pytest
+pytest-cov
+requests

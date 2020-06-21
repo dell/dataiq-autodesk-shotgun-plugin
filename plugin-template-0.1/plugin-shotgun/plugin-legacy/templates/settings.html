@@ -1,0 +1,51 @@
+<head>
+    <title>Edit Configuration</title>
+    <script type="text/javascript">
+        let etag = "";
+        function load() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "file");
+            xhr.setRequestHeader("If-None-Match", etag);
+            xhr.onload = function() {
+                if (200 === xhr.status) {
+                    etag = xhr.getResponseHeader("ETag");
+                    document.getElementById("configuration").value = xhr.responseText;
+                } else {
+                    alert("An unknown error occurred. Please inform the plugin author or IT staff.");
+                }
+            };
+            xhr.send();
+        }
+        function save() {
+            const text = document.getElementById("configuration").value;
+            const xhr = new XMLHttpRequest();
+            xhr.open("PUT", "file");
+            xhr.setRequestHeader("If-Match", etag);
+            xhr.onload = function() {
+                if (204 === xhr.status){
+                    load();
+                    const cstatus = document.getElementById('config_status'); 
+                    cstatus.innerHTML = "Configuration successfully saved. You can now close this dialog.";
+                } else if (412 === xhr.status)
+                    alert(xhr.responseText);
+                else
+                    alert("An unknown error occurred. Please inform the plugin author or IT staff.");
+            };
+            xhr.send(text);
+        }
+        load();
+    </script>
+</head>
+<body>
+<div>
+    <label>
+        <textarea id="configuration" cols="113" rows="35"></textarea>
+    </label>
+    <div>
+        <h2 id="config_status" style="color: #CCCCCC;"></h2>
+    </div>
+    <div>
+        <button onClick="save()">Save</button>
+    </div>
+</div>
+</body>

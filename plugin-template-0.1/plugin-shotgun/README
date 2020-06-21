@@ -1,0 +1,102 @@
+From within this folder...
+
+To easily see what's running in DataIQ K8s, run: ./listpods
+-- This runs:
+	"kubectl get pods -ndataiq"
+
+To easily remove the plugin-shotgun service and deployment from DataIQ K8s, run: ./stop
+-- This runs:
+	"kubectl delete -ndataiq service plugin-shotgun"
+	"kubectl delete -ndataiq deployment plugin-shotgun"
+
+To build the docker image easily: ./rebuild
+-- Advised to not run this until after running "./stop"
+-- This runs:
+	"docker rmi plugin-shotgun:1.0-3" 
+	 -- This may fail if a plugin-shotgun pod is still visibile when running "./listpods"
+	 -- It's ok if this fails when no plugin-shotgun:1.0-3 docker image exists locally yet
+        "docker build -t plugin-shotgun:1.0-3 ."
+	 -- It should be ok to build the docker image if one already exists, but I (Matt) prefer full, clean builds
+	 -- If you are ok with building on top of the existing docker image of plugin-shotgun:1.0-3, go ahead and run the 'docker build' command above.
+
+To easily add and run the plugin-shotgun service and deployment in DataIQ K8s, run: ./create
+-- Advised, especially for debugging purposes, to not run this until you have run "./stop" and "./listpods" shows no 'plugin-shotgun' anymore
+-- This runs:
+	"kubectl create -f plugin-shotgun.yaml"
+
+To easily add and run the claritynow service and deployment in DataIQ K8s, run: ./cncreate
+-- Advised, especially for debugging purposes, to not run this until you have run "./cnkill" and "./listpods" shows no 'claritynow' anymore
+-- This runs:
+	"kubectl create -f /opt/dataiq/k8s/claritynow.yaml"
+
+To ensure that you can communicate correctly with ClarityNow:
+-- Place the "claritynowapi.py" file that exists in this folder inside /opt/dataiq/maunakea/claritynow/plugins/. Allow it to overwrite the existing claritynowapi.py in that location
+-- While you are testing plugin code that uses claritynowapi.py's ClarityNowConnection, make sure to initialize the ClarityNowConnection object with 'ignore_server_version=True'
+	-- Example: cnApi = claritynowapi.ClarityNowConnection(plugin_name=PLUGIN_NAME, ignore_server_version=True)
+	-- When pushing your code into production, make sure ignore_server_version is False (or just not present in initialization)
+-- NOTE: Neither of these things will be necessary in the future, once changes to claritynowapi.py exist in our ClarityNow master branch
+
+Once "./listpods" shows both claritynow and plugin-shotgun as "Running", you will want to verify:
+1) That plugin-shotgun is behaving as expected, by viewing the logs
+	-- Run: kubectl logs <optional '-f' for 'follow'> -ndataiq <full pl<full plugin-shotgun pod name seen via running "./listpods">
+2) That you can communicate from the ClarityNow pod to the plugin-shotgun pod. You can do this by:
+	-- Run 1: kubectl exec -it -ndataiq <full claritynow pod name seen via running "./listpods"> bash
+	-- Run 2: curl -X POST http://localhost:30080/plugins/actions/ -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMTgiLCJleHAiOjI1MTYyMzkwMjIsInByaXYiOi0xfQ.fQ9ADfNAxmdHdNLC3pfnru9ETomudx0uNG6QBI7bx9I" -H "Content-Type: application/json" --data '{"context": {}}'
+	  -- If communicating with the plugin-shotgun pod correctly, the above command should return something like: {"actions":[{"name":"Howdy Yall","execute":"\/plugin\/Hello Plugin Dos\/execute","parameters":[]},{"name":"Aloha Dudes","execute":"\/plugin\/Hello Plugin Dos\/execute","parameters":[]}]}
+
+To manually force plugin-shotgun to be in the "enabled" state:
+	-- Make sure that "./listpods" has shown plugin-shotgun as running at least once
+	  -- This can only happen after building the plugin-shotgun docker image (./rebuild) and then running ./create
+        -- Run: "./enable" from the host, not from the pod
+          -- It would be helpful to have two terminals open. One is logged into the pod, the other is just on the host so you can
+             easily run the provided scripts, like ./enable.
+
+If you want to do live-edits to plugin-shotgun code, while it is running as a pod inside DataIQ's K8s:
+	-- "./stop" (terminates any running plugin-shotgun service and deployment in K8s)
+        -- "./debug"
+          -- This will do the same as "./create", but it will use plugin-shotgun-debug.yaml, which replaces the docker containers execution command with:
+              - ["/bin/bash", "-c", "tail -f /dev/null"]
+	-- "./listpods"
+	-- kubectl exec -it -ndataiq <plugin-shotgun's full pod name from "./listpods"> bash
+	-- Test that the flask app can run, with "flask run --host=0.0.0.0 --port=5000"
+	-- Ctrl+C twice to kill the flask app
+	-- Edit whatever you want to and then run "flask run --host=0.0.0.0 --port=5000" again (from /plugin-legacy/ folder)
+	-- Note that any edits you make within the pod will not be preserved on the host machine. Once the pod goes down, all changes are lost.
+           I recommend saving changes to a host storage location, such as /hoststorage/outputs/ or some location under host's /mnt
+
+If you see messages that the plugin was disabled due to changes to ca.control, you may need to remove the plugin's .configs directory from the host machine:
+	-- "./stop"
+	-- "rm /opt/dataiq/maunakea/data/plugins/plugin-datamover/.configs"
+        -- "./listpods" (until you no longer see your plugin running)
+        -- "./enable" (just to be safe while debugging)
+	-- "./create"
+	-- At this point, when you look at the logs or run flask from the CLI in the pod, you should no longer see that there are issues with ca.control
+
+If you are having issues hitting endpoints within your pod, make sure the endpoint you are trying to hit has a trailing slash on it
+	-- Right: http://plugin-shotgun:5000/execute/
+	-- Wrong: http://plugin-shotgun:5000/execute
+
+If you see errors related to Vol1 appear while running flask, it means the cron jobs are running. To get rid of cron job executions, you should rebuild your docker image with a modified ca.control - one that won't cause cron jobs to execute.
+
+To ensure the plugin is registering itself correctly within claritynow and enabled within claritynow:
+	-- Make sure your plugin pod(s) are up and running flask.
+	-- Log in to the claritynow pod from a separate terminal.
+        -- To see if your plugin registered with ClarityNow, you should see an entry for it in the results of this curl command:
+	  -- curl -v -X GET http://claritynow:30080/plugins/ -u root:
+        -- To enable your plugin in ClarityNow's DB, use this curl command:
+	  -- curl -X PUT http://claritynow:30080/plugins/helloplugin/status/ -u root: -H 'Content-Type: text' --data 'enabled'
+	  -- NOTE: 'helloplugin' is the "short_name" of the plugin. "short_name"s are always going to be the "Plugin Name" from
+	     ca.control, but will be lower-case with all spaces removed
+	-- To see whether the plugin's Custom Action Items (plugin-offered actions) are registered with ClarityNow, do this curl command:
+	  -- curl -v -X POST http://claritynow:30080/plugins/all/actions/ -u root: -H 'Content-Type: application/json' --data '{"context": {}}'
+	  -- NOTE: This will return all actions from all plugins that have been installed and enabled in ClarityNow.
+	  -- NOTE2: If this is the first time you've hit the endpoint after enabling the plugin in ClarityNow, then it will reach out to the
+             plugin pod to get the actions from it. You should be able to see ClarityNow make a connection to endpoint '/internal/configuration/' in
+	     the plugin pod's output.
+	-- If anything is not working:
+	  -- Make sure your plugin pod's flask app is running
+	  -- Make sure all endpoints you are hitting end with a trailing '/'
+	  -- Look at the output from the plugin pod's running flask app
+	  -- Look at the ClarityNow logs to see if any errors are being reported there.
+	      -- If you're in a claritynow pod, you can see these here: /usr/local/claritynow/log/clarity_now.0.log
+	      -- If you are just on the host machine (not in a claritynow pod), you can see them here: /opt/dataiq/maunakea/claritynow/log/clarity_now.0.log
