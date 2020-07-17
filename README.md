@@ -163,7 +163,7 @@ You can trigger the plugin manually by selecting a folder on DataIQ dashboard
 Select the "Actions" tab and click **Run shotgun plugin**
 
 <div style="text-align:center">
-<img src="./assets/run-plugin.png" />
+<img  style="width: 250px;" src="./assets/run-plugin.png" />
 </div>
 
 ## Configure Shotgun
@@ -215,7 +215,7 @@ You have access to a free 30 days trial
 Go to Scripts
 
 <div style="text-align:center">
-<img src="./assets/scripts.png" />
+<img  style="width: 200px;" src="./assets/scripts.png" />
 </div>
 
 <div style="text-align:center">
