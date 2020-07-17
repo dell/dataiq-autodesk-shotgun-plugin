@@ -95,10 +95,10 @@ Shotgun plugin needs tags to identify shotgun shots. This is done using the auto
 
 In DataIQ go to **settings** > **data management configuration** > **Other settings** > **Autotagging configuration file**
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/dataiq-settings.png" />
 <img src="./assets/autotagging.png" />
-</div>
+</p>
 
 Add at the end of file the following:
 Replace the <VOLUME NAME> with your volume name
@@ -109,17 +109,17 @@ match /<VOLUME NAME>/([^/]+)/sequences/([^/]+)/shots/([^/]+)
    apply_tag shot/$1_$2_$3
 ```
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/autotagging-configuration.png" />
-</div>
+</p>
 
 ### Configure Shotgun plugin
 
 In DataIQ go to **settings** > **data management configuration** > **plugins** > **Select Shotgun plugin** > **Edit configuration**
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/plugin-list.png" />
-</div>
+</p>
 
 and edit the global configuration:
 
@@ -131,40 +131,40 @@ and edit the global configuration:
   expirationDelay: 7
 ```
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/global-configuration.png" />
-</div>
+</p>
 
 ### Enable Shotgun plugin
 
 Once configured you can enable the plugin by going to:
 **settings** > **data management configuration** > **plugins** > **Select Shotgun plugin** > **Enable**
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/enable-plugin.png" />
-</div>
+</p>
 
 The plugin is automatically executed everyday at 1:00 AM (You can also edit the Cron jobs in the configuration file)
 
 **settings** > **data management configuration** > **plugins** > **Select Shotgun plugin** > **Edit configuration**
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/cronjob.png" />
-</div>
+</p>
 
 ### Trigger Shotgun plugin manually
 
 You can trigger the plugin manually by selecting a folder on DataIQ dashboard
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/trigger-manually.png" />
-</div>
+</p>
 
 Select the "Actions" tab and click **Run shotgun plugin**
 
-<div style="text-align:center">
-<img  style="width: 250px;" src="./assets/run-plugin.png" />
-</div>
+<p align="center">
+<img width="250" src="./assets/run-plugin.png" />
+</p>
 
 ## Configure Shotgun
 
@@ -176,51 +176,51 @@ You have access to a free 30 days trial
 
 ### Create a new project
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/new-project.png" />
-</div>
+</p>
 
 ### Create a new sequence
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/new-sequence.png" />
-</div>
+</p>
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/new-sequence-1.png" />
-</div>
+</p>
 
 ### Add a a new shot
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/shot.png" />
-</div>
+</p>
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/new-shot.png" />
-</div>
+</p>
 
 ### Attach the shot to the create sequence
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/add-to-sequence.png" />
-</div>
+</p>
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/add-to-sequence-validate.png" />
-</div>
+</p>
 
 ### Create a new API
 
 Go to Scripts
 
-<div style="text-align:center">
-<img  style="width: 200px;" src="./assets/scripts.png" />
-</div>
+<p align="center">
+<img width="200" src="./assets/scripts.png" />
+</p>
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/new-script.png" />
-</div>
+</p>
 
 Once created [edit the global configuration with the API credentials](#configure-shotgun-plugin)
 
@@ -264,6 +264,6 @@ Now you can re-scan volumes and [trigger Shotgun manually](#trigger-shotgun-plug
 
 If everything worked correctly you will have your shots tagged!
 
-<div style="text-align:center">
+<p align="center">
 <img src="./assets/tagged.png" />
-</div>
+</p>
