@@ -63,7 +63,6 @@ class ShotgunPlugin:
             self.log = logging.getLogger(LOGGING_NAME)
         else:
             self.log = ccmtools.CcmLog(IDENT, ('v%s' % VERSION,), debug=self.debug, facility=self.facility)
-        self.log.error(self._format_log(('Failed to bulk set tags', 'Attempting to set one by one')))
         # Prepare shotgun API
         self.shotgun_api_url = self._get_from_config('shotgunAPIUrl')
         self.shotgun_api_script_name = self._get_from_config('shotgunAPIScriptName')
@@ -241,6 +240,7 @@ class ShotgunPlugin:
                     self.log.error(self._format_log(('Failed to delete implied tags', '-'.join(implied_tag[1]), 'parent {0}'.format(implied_tag[0]))))
 
     def start(self):
+        self.log.info(self._format_log(('Shotgun plugin', 'Starting execution')))
         shot_tags = self._retrieve_shot_tags()
         shots = self._retrieve_shotgun_shots()
         for shot_tag in shot_tags:
@@ -254,6 +254,7 @@ class ShotgunPlugin:
         self._commit_tags()
         self._commit_implied_tags()
         self.sg.close()
+        self.log.info(self._format_log(('Shotgun plugin', 'Execution terminated')))
 
 def main():
     #Get current path

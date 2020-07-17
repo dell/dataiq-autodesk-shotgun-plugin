@@ -1,3 +1,5 @@
+The shotgun plugin connects to the shotgun API and applies tag to the shots found on the filesystem
+
 # Prerequisite
 
 Have DataIQ running on the host machine
@@ -111,8 +113,6 @@ match /<VOLUME NAME>/([^/]+)/sequences/([^/]+)/shots/([^/]+)
 <img src="./assets/autotagging-configuration.png" />
 </div>
 
-TODO: Explain how Shotgun works
-
 ### Configure Shotgun plugin
 
 In DataIQ go to **settings** > **data management configuration** > **plugins** > **Select Shotgun plugin** > **Edit configuration**
@@ -164,4 +164,106 @@ Select the "Actions" tab and click **Run shotgun plugin**
 
 <div style="text-align:center">
 <img src="./assets/run-plugin.png" />
+</div>
+
+## Configure Shotgun
+
+### Register on Shotgun
+
+Create an account on https://www.shotgunsoftware.com/ and signin
+
+You have access to a free 30 days trial
+
+### Create a new project
+
+<div style="text-align:center">
+<img src="./assets/new-project.png" />
+</div>
+
+### Create a new sequence
+
+<div style="text-align:center">
+<img src="./assets/new-sequence.png" />
+</div>
+
+<div style="text-align:center">
+<img src="./assets/new-sequence-1.png" />
+</div>
+
+### Add a a new shot
+
+<div style="text-align:center">
+<img src="./assets/shot.png" />
+</div>
+
+<div style="text-align:center">
+<img src="./assets/new-shot.png" />
+</div>
+
+### Attach the shot to the create sequence
+
+<div style="text-align:center">
+<img src="./assets/add-to-sequence.png" />
+</div>
+
+<div style="text-align:center">
+<img src="./assets/add-to-sequence-validate.png" />
+</div>
+
+### Create a new API
+
+Go to Scripts
+
+<div style="text-align:center">
+<img src="./assets/scripts.png" />
+</div>
+
+<div style="text-align:center">
+<img src="./assets/new-script.png" />
+</div>
+
+Once created [edit the global configuration with the API credentials](#configure-shotgun-plugin)
+
+### Create the folder hierarchy
+
+On the host machine go to your mounted volume and create the following folders:
+
+```bash
+$ mkdir -p dataiqtest/sequences/sequence/shots/shot
+```
+
+If you look carefully, our hierarchy is composed of the following:
+
+```
+<PROJECT_NAME>/SEQUENCES/<SEQUENCE_FOLDERS>/SHOTS/<SHOT_FOLDERS>
+
+.
+`-- sequences
+    `-- sequence
+        `-- shots
+            `-- shot
+```
+
+- The sequences folder is composed of folders within the same name of the sequences created on Shotgun
+- The shots folder is composed of folders within the same name of the shots created on Shotgun
+
+For instance if we have a shot named 'test' we will have the following tree:
+
+```
+.
+`-- sequences
+    `-- sequence
+        `-- shots
+            `-- shot
+            `-- test
+```
+
+### Run Shotgun plugin
+
+Now you can re-scan volumes and [trigger Shotgun manually](#trigger-shotgun-plugin-manually)
+
+If everything worked correctly you will have your shots tagged!
+
+<div style="text-align:center">
+<img src="./assets/tagged.png" />
 </div>
