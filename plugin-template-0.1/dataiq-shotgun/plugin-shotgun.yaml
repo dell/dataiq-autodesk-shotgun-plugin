@@ -35,43 +35,35 @@ spec:
         run: plugin-shotgun
     spec:
       containers:
-      - name: plugin-shotgun
-        image: plugin-shotgun:1.0-3
-        ports:
-        - containerPort: 5000
-          name: http
-        volumeMounts:
-        - name: plugin-data
-          mountPath: /hoststorage
-          mountPropagation: HostToContainer
-        - name: claritynow-mnt
-          mountPath: /mnt
-          readOnly: false
-          mountPropagation: HostToContainer
-        - name: claritynow-python
-          mountPath: /usr/local/claritynow/scripts/python
-          readOnly: true
-          mountPropagation: HostToContainer
-        - name: nfs-mnt
-          mountPath: /dataiq
-          readOnly: false
-          mountPropagation: HostToContainer
-        env:
-        - name: LC_ALL
-          value: en_US.UTF-8
-        - name: SHOTGUN_PLUGIN_MODE
-          value: dataiq
+        - name: plugin-shotgun
+          image: plugin-shotgun:1.0-3
+          ports:
+            - containerPort: 5000
+              name: http
+          volumeMounts:
+            - name: plugin-data
+              mountPath: /hoststorage
+              mountPropagation: HostToContainer
+            - name: claritynow-mnt
+              mountPath: /mnt
+              readOnly: false
+              mountPropagation: HostToContainer
+            - name: claritynow-python
+              mountPath: /usr/local/claritynow/scripts/python
+              readOnly: true
+              mountPropagation: HostToContainer
+          env:
+            - name: LC_ALL
+              value: en_US.UTF-8
+            - name: SHOTGUN_PLUGIN_MODE
+              value: dataiq
       volumes:
-      - name: plugin-data
-        hostPath:
-          path: /opt/dataiq/maunakea/data/plugins/plugin-shotgun
-      - name: claritynow-mnt
-        hostPath:
-          path: /mnt
-      - name: claritynow-python
-        hostPath:
-          path: /opt/dataiq/maunakea/claritynow/plugins/
-      - name: nfs-mnt
-        hostPath:
-          path: /dataiq
-...
+        - name: plugin-data
+          hostPath:
+            path: /opt/dataiq/maunakea/data/plugins/plugin-shotgun
+        - name: claritynow-mnt
+          hostPath:
+            path: /mnt
+        - name: claritynow-python
+          hostPath:
+            path: /opt/dataiq/maunakea/claritynow/plugins/

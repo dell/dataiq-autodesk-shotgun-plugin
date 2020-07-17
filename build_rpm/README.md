@@ -1,3 +1,0 @@
-###DONT FORGET TO UPDATE THE RELEASE VERSION OF THE RPM
-
-- ./rpmbuild/SPECS/cn_shotgun.spec
