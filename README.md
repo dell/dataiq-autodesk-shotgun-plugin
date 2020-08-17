@@ -99,7 +99,8 @@ The shotgun plugin assumes the following directory structure on filesystem.
 /volumename/showname/sequences/sequencename/shots/shotnumber/
 
 ```
-Where volumename, showname, sequencename, and shotnumber are variable
+Where volumename, showname, sequencename, and shotnumber are variable.
+
 A /sequences directory (case sensitive) must exist at the third level depth and a /shots directory must exist at the fifth level depth. 
 
 
