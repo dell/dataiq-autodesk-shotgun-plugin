@@ -102,7 +102,7 @@ The shotgun plugin assumes the following directory structure on filesystem.
 Where volumename, showname, sequencename, and shotnumber are variable
 A /sequences directory (case sensitive) must exist at the third level depth and a /shots directory must exist at the fifth level depth. 
 
-```
+
 Notes: 
 -	This directory pattern is hard-coded into the example shotgun plugin.   
 -	If your actual production directory structure varies from the above example, both the DataIQ regular expression autotag rule and the actual python API to Shotgun will need to be modified to match actual directory structure in production.
