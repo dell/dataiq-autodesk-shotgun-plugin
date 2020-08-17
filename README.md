@@ -93,6 +93,17 @@ $ flask run --host=0.0.0.0 --port=5000
 
 Shotgun plugin needs tags to identify shotgun shots. This is done using the autotagging feature.
 
+The shotgun plugin assumes the following directory structure on filesystem.
+/volumename/showname/sequences/sequencename/shots/shotnumber/
+Where volumename, showname, sequencename, and shotnumber are variable
+A /sequences directory (case sensitive) must exist at the third level depth and a /shots directory must exist at the fifth level depth.   
+Notes: 
+-	This directory pattern is hard-coded into the example shotgun plugin.   
+-	If your actual production directory structure varies from the above example, both the DataIQ regular expression autotag rule and the actual python API to Shotgun will need to be modified to match actual directory structure in production.
+-	shownames can actual span multiple filesystem volumes (example: production storage and archive storage) if first level autotag regular expression matches on multiple volumes
+-	The python API call to Shotgun can then also be refined for further efficiencies
+
+
 In DataIQ go to **settings** > **data management configuration** > **Other settings** > **Autotagging configuration file**
 
 <p align="center">
