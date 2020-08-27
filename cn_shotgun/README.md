@@ -1,8 +1,8 @@
 # README #
 
-Shotgun Plugin for ClarityNow!
-Copyright (C) 2020 DataFrameworks - all rights reserved
-A plugin license is required for each ClarityNow! Server
+Shotgun Plugin for DataIQ
+Copyright (C) 2020 Dell Technologies - all rights reserved
+A plugin license is required for each DataIQ Server
 
 ### Summary ###
 
