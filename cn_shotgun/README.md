@@ -1,7 +1,7 @@
 # README #
 
 Shotgun Plugin for DataIQ
-Copyright (C) 2020 Dell Technologies - all rights reserved
+Copyright (C) 2020 Dell Inc or its subsidiaries - all rights reserved
 A plugin license is required for each DataIQ Server
 
 ### Summary ###
@@ -10,8 +10,7 @@ The shotgun plugin connects to the shotgun API and applies tag to the shots foun
 
 ### Who do I talk to? ###
 
-* romain@trackit.io
-* ludo@trackit.io
+* greg.shiff@dell.com
 
 ### Installation ###
 
