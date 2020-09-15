@@ -1,3 +1,0 @@
-#!/bin/bash
-kubectl delete -ndataiq service plugin-shotgun
-kubectl delete -ndataiq deployment plugin-shotgun

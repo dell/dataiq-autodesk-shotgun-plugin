@@ -1,3 +1,0 @@
-#!/bin/bash
-docker rmi plugin-shotgun:1.0-3
-docker build -t plugin-shotgun:1.0-3 .

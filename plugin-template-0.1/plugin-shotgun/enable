@@ -1,2 +1,0 @@
-mkdir -p /opt/dataiq/maunakea/data/plugins/plugin-shotgun/status
-echo '''enabled''' > /opt/dataiq/maunakea/data/plugins/plugin-shotgun/status/mode

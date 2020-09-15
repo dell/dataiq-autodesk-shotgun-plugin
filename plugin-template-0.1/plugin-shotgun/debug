@@ -1,2 +1,0 @@
-#!/bin/bash
-kubectl create -f plugin-shotgun-debug.yaml
