@@ -257,7 +257,7 @@ If everything worked correctly you will have your shots tagged!
 
 ### Uninstall the plug-in
 
-Disable the plug-in
+Disable the plug-in in DataIQ, go to **settings** > **data management configuration** > **plugins** > **Select Shotgun plugin** > **Edit configuration**
 
 <p align="center">
 <img src="./assets/disable.png" />
