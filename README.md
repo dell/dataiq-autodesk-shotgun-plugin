@@ -254,3 +254,19 @@ If everything worked correctly you will have your shots tagged!
 <p align="center">
 <img src="./assets/tagged.png" />
 </p>
+
+### Uninstall the plug-in
+
+Stop the plugin
+
+```bash
+~ $ /opt/dataiq/plugin_manager/bin/plugin_manager stop shotgun-plugin
+```
+
+Delete plug-in componenets
+
+```bash
+~ $ /opt/dataiq/plugin_manager/bin/plugin_manager rm shotgun-plugin
+~ $ rm -rf /opt/dataiq/maunakea/data/plugins/shotgun-plugin/
+```
+
