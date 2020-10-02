@@ -15,16 +15,18 @@ Must have Python pip installed. May require the epel-release package for Red Hat
 (shotgun) $ mkdir "dist"
 ```
 
-### Copy plugin-template-0.1 folder content into previously created temporary folder
+### Migrate Host Storage
 
 ```bash
-$ cp -r ./plugin-template-0.1/* ./build_tmp/
+(shotgun) $ cp -rv "hoststorage/." "build"
 ```
 
-### Copy plugin code in the template sample
+### Pull Dependencies
 
 ```bash
-$ cp -r ./cn_shotgun/*.py ./build_tmp/plugin-shotgun/plugin
+(shotgun) $ cd "build"
+(build) $ python2 -m pip download -d deps2 -r requirements.txt
+
 ```
 
 ### Copy plugin configuration
