@@ -8,10 +8,11 @@ Must have Python pip installed. May require the epel-release package for Red Hat
 
 ## Installation
 
-### Create a temporary folder for building process
+### Create directories to host plugin
 
 ```bash
-$ mkdir build_tmp
+(shotgun) $ mkdir "build"
+(shotgun) $ mkdir "dist"
 ```
 
 ### Copy plugin-template-0.1 folder content into previously created temporary folder
