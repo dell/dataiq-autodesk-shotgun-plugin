@@ -29,67 +29,31 @@ Must have Python pip installed. May require the epel-release package for Red Hat
 
 ```
 
-### Copy plugin configuration
+### Build Host Storage
+
+We are packaging the hoststorage and Python dependencies into a single archive file so that this plugin can be installed on any DataIQ host. It is self-contained so that running the plugin does not require a connection to the outside internet to download dependencies at runtime.
 
 ```bash
-$ cp -r ./build_tmp/plugin-shotgun/plugin/ca.control ./build_tmp/dataiq-shotgun
+(build) $ tar -czvf "../dist/shotgun-plugin-1.0.0.tar.gz" *
 ```
 
-### Change directory
+### Initialize Plug-in Manager
 
 ```bash
-$ cd ./build_tmp/plugin-shotgun
+(shotgun) $ /opt/dataiq/plugin_manager/bin/plugin_manager init
 ```
 
-### Rebuild docker image
+### Install the plug-in using the host storage archive
 
 ```bash
-$ ./rebuild
+(shotgun) $ /opt/dataiq/plugin_manager/bin/plugin_manager install shotgun-plugin plugin-centos-base
+-f "dist/shotgun-plugin-1.0.0.tar.gz"
 ```
 
-### Start container in debug mode
+### Start the installed plug-in
 
 ```bash
-$ ./debug
-```
-
-### Get pods name and copy the pod name related to plugin-shotgun
-
-```bash
-$ ./listpods
-```
-
-e.g:
-**plugin-shotgun-5f7fff54c5-s22mt**
-
-```
-claritynow-6b8b9568f7-9g47x       1/1     Running     0          60m
-claritynow-plugin-init-clhrp      0/1     Completed   0          60m
-clew-55cd5dd466-bskss             1/1     Running     0          61m
-imanager-667cd998c-kh5l9          1/1     Running     0          60m
-ixui-5db7946d5f-2nvkt             1/1     Running     0          61m
-keycloak-0                        1/1     Running     0          58m
-keycloakdb-0                      1/1     Running     0          61m
-plugin-shotgun-5f7fff54c5-s22mt   1/1     Running     0          67s
-```
-
-### Connect to container
-
-```bash
-$ kubectl exec -it -ndataiq <POD NAME> bash
-```
-
-Replace <POD NAME> with the correct value.
-e.g:
-
-```
-kubectl exec -it -ndataiq plugin-shotgun-5f7fff54c5-s22mt bash
-```
-
-### Start plugin server
-
-```bash
-$ flask run --host=0.0.0.0 --port=5000
+~ $ /opt/dataiq/plugin_manager/bin/plugin_manager start shotgun-plugin
 ```
 
 ## Plugin configuration
