@@ -257,7 +257,13 @@ If everything worked correctly you will have your shots tagged!
 
 ### Uninstall the plug-in
 
-Stop the plugin
+Disable the plug-in
+
+<p align="center">
+<img src="./assets/disable.png" />
+</p>
+
+Stop the plug-in
 
 ```bash
 ~ $ /opt/dataiq/plugin_manager/bin/plugin_manager stop shotgun-plugin
