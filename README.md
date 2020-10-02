@@ -1,4 +1,4 @@
-The shotgun plugin connects to the shotgun API and applies tag to the shots found on the filesystem
+The shotgun plug-in connects to the shotgun API and applies tag to the shots found on the filesystem
 
 # Prerequisite
 
@@ -8,7 +8,7 @@ Must have Python pip installed. May require the epel-release package for Red Hat
 
 ## Installation
 
-### Create directories to host plugin
+### Create directories to host plug-in
 
 ```bash
 (shotgun) $ mkdir "build"
@@ -31,7 +31,7 @@ Must have Python pip installed. May require the epel-release package for Red Hat
 
 ### Build Host Storage
 
-We are packaging the hoststorage and Python dependencies into a single archive file so that this plugin can be installed on any DataIQ host. It is self-contained so that running the plugin does not require a connection to the outside internet to download dependencies at runtime.
+We are packaging the hoststorage and Python dependencies into a single archive file so that this plug-in can be installed on any DataIQ host. It is self-contained so that running the plug-in does not require a connection to the outside internet to download dependencies at runtime.
 
 ```bash
 (build) $ tar -czvf "../dist/shotgun-plugin-1.0.0.tar.gz" *
@@ -56,13 +56,13 @@ We are packaging the hoststorage and Python dependencies into a single archive f
 ~ $ /opt/dataiq/plugin_manager/bin/plugin_manager start shotgun-plugin
 ```
 
-## Plugin configuration
+## Plug-in configuration
 
 ### Configure autotagging
 
-Shotgun plugin needs tags to identify shotgun shots. This is done using the autotagging feature.
+Shotgun plug-in needs tags to identify shotgun shots. This is done using the autotagging feature.
 
-The shotgun plugin assumes the following directory structure on filesystem.
+The shotgun plug-in assumes the following directory structure on filesystem.
 
 ```
 /volumename/showname/sequences/sequencename/shots/shotnumber/
@@ -100,7 +100,7 @@ match /<VOLUME NAME>/([^/]+)/sequences/([^/]+)/shots/([^/]+)
 <img src="./assets/autotagging-configuration.png" />
 </p>
 
-### Configure Shotgun plugin
+### Configure Shotgun plug-in
 
 In DataIQ go to **settings** > **data management configuration** > **plugins** > **Select Shotgun plugin** > **Edit configuration**
 
@@ -122,7 +122,7 @@ and edit the global configuration:
 <img src="./assets/global-configuration.png" />
 </p>
 
-### Enable Shotgun plugin
+### Enable Shotgun plug-in
 
 Once configured you can enable the plugin by going to:
 **settings** > **data management configuration** > **plugins** > **Select Shotgun plugin** > **Enable**
@@ -139,9 +139,9 @@ The plugin is automatically executed everyday at 1:00 AM (You can also edit the 
 <img src="./assets/cronjob.png" />
 </p>
 
-### Trigger Shotgun plugin manually
+### Trigger Shotgun plug-in manually
 
-You can trigger the plugin manually by selecting a folder on DataIQ dashboard
+You can trigger the plug-in manually by selecting a folder on DataIQ dashboard
 
 <p align="center">
 <img src="./assets/trigger-manually.png" />
@@ -245,7 +245,7 @@ For instance if we have a shot named 'test' we will have the following tree:
             `-- test
 ```
 
-### Run Shotgun plugin
+### Run Shotgun plug-in
 
 Now you can re-scan volumes and [trigger Shotgun manually](#trigger-shotgun-plugin-manually)
 
