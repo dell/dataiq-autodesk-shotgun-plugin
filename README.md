@@ -2,7 +2,8 @@ The shotgun plugin connects to the shotgun API and applies tag to the shots foun
 
 # Prerequisite
 
-Have DataIQ running on the host machine
+Have DataIQ running on the host machine.
+
 Must have Python pip installed. May require the epel-release package for Red Hat.
 
 ## Installation
