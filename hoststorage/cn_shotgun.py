@@ -3,7 +3,7 @@
 
 from __future__ import print_function # Use Python 3 printing
 # Data mover Plugin for ClarityNow!
-# Copyright (C) 2020 by DataFrameworks, Inc. - all rights reserved
+# Copyright (C) 2020 Dell Inc. or its subsidiaries
 # A plugin license is required.
 # Summary: The shotgun plugin connects to the shotgun API and applies tag to the shots found on the filesystem
 # Notes:
