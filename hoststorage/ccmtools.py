@@ -4,7 +4,7 @@ Provide tools for ClarityNow Custom Context Menus
 Name:        ccmtools.py
 Description: Provide tools for ClarityNow Custom Context Menus
 Author:      Doug Schafer
-Copyright:   Copyright (C) 2015 DataFrameworks, Inc.
+Copyright:   Copyright (C) 2020 Dell Inc. or its subsidiaries
 Version:     1.8
 Date:        June 6, 2015
 
