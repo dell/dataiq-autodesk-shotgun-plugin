@@ -209,7 +209,7 @@ Go to Scripts
 <img src="./assets/new-script.png" />
 </p>
 
-Once created [edit the global configuration with the API credentials](#configure-shotgun-plugin)
+Once created [edit the global configuration with the API credentials](#configure-shotgun-plug-in)
 
 ### Create the folder hierarchy
 
@@ -247,7 +247,7 @@ For instance if we have a shot named 'test' we will have the following tree:
 
 ### Run Shotgun plug-in
 
-Now you can re-scan volumes and [trigger Shotgun manually](#trigger-shotgun-plugin-manually)
+Now you can re-scan volumes and [trigger Shotgun manually](#trigger-shotgun-plug-in-manually)
 
 If everything worked correctly you will have your shots tagged!
 
