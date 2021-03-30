@@ -272,7 +272,7 @@ Then run the following substituting the name of the plug-in pod.
 See this example:
 
 <p align="center">
-<img src="./assets/logs.png" />
+<img src="./assets/log.png" />
 </p>
 
 ### Uninstall the plug-in
