@@ -255,6 +255,22 @@ If everything worked correctly you will have your shots tagged!
 <img src="./assets/tagged.png" />
 </p>
 
+### View plug-in logs
+
+From the command line of the DataIQ server run: 
+
+```bash
+~ $ kubectl -ndataiq get pods
+```
+
+This will show the name of the plug-in pod.
+
+Then run:
+
+```bash
+~ $ kubectl -ndataiq log <NAME OF POD>
+```
+
 ### Uninstall the plug-in
 
 Disable the plug-in in DataIQ, go to **settings** > **data management configuration** > **plugins** > **Select Shotgun plugin** > **Disable**
