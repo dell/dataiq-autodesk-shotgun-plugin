@@ -4,7 +4,7 @@ The shotgun plug-in connects to the shotgun API and applies tag to the shots fou
 
 Have DataIQ running on the host machine.
 
-Must have Python pip installed. May require the epel-release package for Red Hat.
+Must have Python-pip and git installed. May require the epel-release package for Red Hat.
 
 ## Installation
 
@@ -257,7 +257,7 @@ If everything worked correctly you will have your shots tagged!
 
 ### Uninstall the plug-in
 
-Disable the plug-in in DataIQ, go to **settings** > **data management configuration** > **plugins** > **Select Shotgun plugin** > **Edit configuration**
+Disable the plug-in in DataIQ, go to **settings** > **data management configuration** > **plugins** > **Select Shotgun plugin** > **Disable**
 
 <p align="center">
 <img src="./assets/disable.png" />
