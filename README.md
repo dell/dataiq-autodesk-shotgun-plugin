@@ -257,19 +257,23 @@ If everything worked correctly you will have your shots tagged!
 
 ### View plug-in logs
 
-From the command line of the DataIQ server run: 
+From the command line of the DataIQ server run the following to see a list of pods and their names: 
 
 ```bash
 ~ $ kubectl -ndataiq get pods
 ```
 
-This will show the name of the plug-in pod.
-
-Then run:
+Then run the following substituting the name of the plug-in pod.
 
 ```bash
 ~ $ kubectl -ndataiq log <NAME OF POD>
 ```
+
+See this example:
+
+<p=align="center">
+<img src="./assets/logs.png>
+          </p>
 
 ### Uninstall the plug-in
 
